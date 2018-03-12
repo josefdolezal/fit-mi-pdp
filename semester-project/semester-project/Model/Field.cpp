@@ -36,8 +36,7 @@ bool Field::isQueen() {
 }
 
 ostream& operator << (ostream &os, const Field &field) {
-    Location l = field.location;
-    os << "(" << l.x << ", " << l.y << ")";
+    os << field.location << "[" << field.type << "]";
 
     return os;
 }

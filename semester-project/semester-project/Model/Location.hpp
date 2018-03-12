@@ -10,6 +10,7 @@
 #define Location_hpp
 
 #include <stdio.h>
+#include <ostream>
 
 using namespace std;
 
@@ -19,6 +20,8 @@ public:
     u_int32_t y;
 
     Location(u_int32_t x, u_int32_t y);
+
+    friend ostream& operator << (ostream &, const Location &);
 };
 
 #endif /* Location_hpp */

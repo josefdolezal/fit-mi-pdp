@@ -9,3 +9,9 @@
 #include "Location.hpp"
 
 Location::Location(u_int32_t x, u_int32_t y): x(x), y(y) { }
+
+ostream& operator << (ostream &os, const Location &location) {
+    os << "(" << location.x << ", " << location.y << ")";
+
+    return os;
+}

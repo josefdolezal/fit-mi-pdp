@@ -12,6 +12,8 @@
 		D23977FF205697580033269C /* ChessBoard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D23977FD205697580033269C /* ChessBoard.cpp */; };
 		D23978042056B3EE0033269C /* Field.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D23978022056B3EE0033269C /* Field.cpp */; };
 		D23978072056E0660033269C /* Location.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D23978052056E0660033269C /* Location.cpp */; };
+		D239780A2056E2B10033269C /* PiecesMinimalCoverage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D23978082056E2B10033269C /* PiecesMinimalCoverage.cpp */; };
+		D239780D2056E3F00033269C /* CoverageSolution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D239780B2056E3F00033269C /* CoverageSolution.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +39,10 @@
 		D23978032056B3EE0033269C /* Field.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Field.hpp; sourceTree = "<group>"; };
 		D23978052056E0660033269C /* Location.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Location.cpp; sourceTree = "<group>"; };
 		D23978062056E0660033269C /* Location.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Location.hpp; sourceTree = "<group>"; };
+		D23978082056E2B10033269C /* PiecesMinimalCoverage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PiecesMinimalCoverage.cpp; sourceTree = "<group>"; };
+		D23978092056E2B10033269C /* PiecesMinimalCoverage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PiecesMinimalCoverage.hpp; sourceTree = "<group>"; };
+		D239780B2056E3F00033269C /* CoverageSolution.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CoverageSolution.cpp; sourceTree = "<group>"; };
+		D239780C2056E3F00033269C /* CoverageSolution.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CoverageSolution.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +91,8 @@
 				D23978032056B3EE0033269C /* Field.hpp */,
 				D23978052056E0660033269C /* Location.cpp */,
 				D23978062056E0660033269C /* Location.hpp */,
+				D239780B2056E3F00033269C /* CoverageSolution.cpp */,
+				D239780C2056E3F00033269C /* CoverageSolution.hpp */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -94,6 +102,8 @@
 			children = (
 				D23977F72055380E0033269C /* Reader.cpp */,
 				D23978012056AB700033269C /* Reader.hpp */,
+				D23978082056E2B10033269C /* PiecesMinimalCoverage.cpp */,
+				D23978092056E2B10033269C /* PiecesMinimalCoverage.hpp */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -157,6 +167,8 @@
 			files = (
 				D23977FF205697580033269C /* ChessBoard.cpp in Sources */,
 				D23977F92055380E0033269C /* Reader.cpp in Sources */,
+				D239780D2056E3F00033269C /* CoverageSolution.cpp in Sources */,
+				D239780A2056E2B10033269C /* PiecesMinimalCoverage.cpp in Sources */,
 				D23978042056B3EE0033269C /* Field.cpp in Sources */,
 				D23977F120545BF10033269C /* main.cpp in Sources */,
 				D23978072056E0660033269C /* Location.cpp in Sources */,
