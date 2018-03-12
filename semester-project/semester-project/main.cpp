@@ -7,9 +7,18 @@
 //
 
 #include <iostream>
+#include "Reader.hpp"
+#include "ChessBoard.hpp"
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    // Run the solution for each file from given list
+    for(int i = 1; i < argc; ++i) {
+        const char* fileName = argv[i];
+
+        ChessBoard chessboard = Reader::readInput(fileName);
+
+        std::cout << chessboard << std::endl;
+    }
+
     return 0;
 }

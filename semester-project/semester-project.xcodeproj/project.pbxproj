@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D23977F120545BF10033269C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D23977F020545BF10033269C /* main.cpp */; };
+		D23977F92055380E0033269C /* Reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D23977F72055380E0033269C /* Reader.cpp */; };
 		D23977FF205697580033269C /* ChessBoard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D23977FD205697580033269C /* ChessBoard.cpp */; };
 /* End PBXBuildFile section */
 
@@ -26,8 +27,10 @@
 /* Begin PBXFileReference section */
 		D23977ED20545BF10033269C /* semester-project */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "semester-project"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D23977F020545BF10033269C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		D23977F72055380E0033269C /* Reader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Reader.cpp; sourceTree = "<group>"; };
 		D23977FD205697580033269C /* ChessBoard.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ChessBoard.cpp; sourceTree = "<group>"; };
 		D23977FE205697580033269C /* ChessBoard.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ChessBoard.hpp; sourceTree = "<group>"; };
+		D23978012056AB700033269C /* Reader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Reader.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +63,7 @@
 		D23977EF20545BF10033269C /* semester-project */ = {
 			isa = PBXGroup;
 			children = (
+				D2397800205698C50033269C /* Services */,
 				D23977FC205697440033269C /* Model */,
 				D23977F020545BF10033269C /* main.cpp */,
 			);
@@ -73,6 +77,15 @@
 				D23977FE205697580033269C /* ChessBoard.hpp */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D2397800205698C50033269C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D23977F72055380E0033269C /* Reader.cpp */,
+				D23978012056AB700033269C /* Reader.hpp */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D23977FF205697580033269C /* ChessBoard.cpp in Sources */,
+				D23977F92055380E0033269C /* Reader.cpp in Sources */,
 				D23977F120545BF10033269C /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
