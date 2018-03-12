@@ -10,6 +10,7 @@
 		D23977F120545BF10033269C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D23977F020545BF10033269C /* main.cpp */; };
 		D23977F92055380E0033269C /* Reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D23977F72055380E0033269C /* Reader.cpp */; };
 		D23977FF205697580033269C /* ChessBoard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D23977FD205697580033269C /* ChessBoard.cpp */; };
+		D23978072056E0660033269C /* Location.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D23978052056E0660033269C /* Location.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,8 @@
 		D23977FD205697580033269C /* ChessBoard.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ChessBoard.cpp; sourceTree = "<group>"; };
 		D23977FE205697580033269C /* ChessBoard.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ChessBoard.hpp; sourceTree = "<group>"; };
 		D23978012056AB700033269C /* Reader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Reader.hpp; sourceTree = "<group>"; };
+		D23978052056E0660033269C /* Location.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Location.cpp; sourceTree = "<group>"; };
+		D23978062056E0660033269C /* Location.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Location.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +78,8 @@
 			children = (
 				D23977FD205697580033269C /* ChessBoard.cpp */,
 				D23977FE205697580033269C /* ChessBoard.hpp */,
+				D23978052056E0660033269C /* Location.cpp */,
+				D23978062056E0660033269C /* Location.hpp */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -148,6 +153,7 @@
 				D23977FF205697580033269C /* ChessBoard.cpp in Sources */,
 				D23977F92055380E0033269C /* Reader.cpp in Sources */,
 				D23977F120545BF10033269C /* main.cpp in Sources */,
+				D23978072056E0660033269C /* Location.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
