@@ -16,7 +16,7 @@ using namespace std;
 ChessBoard Reader::readInput(const char * &file) {
     ifstream read(file);
     int32_t size, upperBound;
-    char c = '0';
+    char c = ChessBoard::EMPTY_IDENTIFIER;
 
     // Read the chessboard size and upperbound from given file
     read >> size >> upperBound;

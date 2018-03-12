@@ -26,6 +26,9 @@ ChessBoard::~ChessBoard() {
 
 void ChessBoard::setPiece(uint32_t x, uint32_t y, char value) {
     playArea[x][y] = value;
+
+    if(value == BLACK_IDENTIFIER)
+        ++numberOfBlackPieces;
 }
 
 ostream& operator << (ostream & os, const ChessBoard & chessboard) {
