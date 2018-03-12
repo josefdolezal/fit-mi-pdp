@@ -23,7 +23,7 @@ ChessBoard Reader::readInput(const char * &file) {
     // Read the chessboard size and upperbound from given file
     read >> size >> upperBound;
 
-    ChessBoard chessboard(size);
+    ChessBoard chessboard(size, upperBound);
 
     // Read the actual chessboard values
     for(uint32_t y = 0; y < size; ++y) {
@@ -32,6 +32,8 @@ ChessBoard Reader::readInput(const char * &file) {
             chessboard.setPiece(x, y, c);
         }
     }
+
+    read.close();
 
     return chessboard;
 }

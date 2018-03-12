@@ -10,7 +10,7 @@
 
 using namespace std;
 
-ChessBoard::ChessBoard(uint32_t size): size(size) {
+ChessBoard::ChessBoard(uint32_t size, uint32_t upperBound): size(size), upperBound(upperBound) {
     playArea = new Field * [size];
 
     for(uint32_t x = 0; x < size; ++x)
@@ -35,6 +35,10 @@ void ChessBoard::setPiece(uint32_t x, uint32_t y, char value) {
 
     if(field.isQueen())
         queenLocation = field.location;
+}
+
+const Field& ChessBoard::fieldAtLocation(uint32_t x, uint32_t y) {
+    return playArea[x][y];
 }
 
 ostream& operator << (ostream & os, const ChessBoard & chessboard) {

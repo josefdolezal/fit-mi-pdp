@@ -31,10 +31,10 @@ public:
     void setType(char type);
     void setLocation(u_int32_t x, u_int32_t y);
 
-    bool isEmpty();
-    bool isBlack();
-    bool isWhite();
-    bool isQueen();
+    bool isEmpty() const;
+    bool isBlack() const;
+    bool isWhite() const;
+    bool isQueen() const;
 
     friend ostream& operator << (ostream &, const Field &);
 };

@@ -9,15 +9,20 @@
 #include <iostream>
 #include "Reader.hpp"
 #include "ChessBoard.hpp"
+#include "PiecesMinimalCoverage.hpp"
+
+using namespace std;
 
 int main(int argc, const char * argv[]) {
     // Run the solution for each file from given list
     for(int i = 1; i < argc; ++i) {
         const char* fileName = argv[i];
-
         ChessBoard chessboard = Reader::readInput(fileName);
+        PiecesMinimalCoverage solver(chessboard);
 
-        std::cout << chessboard << std::endl;
+        cout << "::::: File: " << fileName << " :::::"  << endl;
+        cout << solver.minimalCoverage() << endl;
+        cout << "::::: Time: " << 0 << ":::::" << endl;
     }
 
     return 0;

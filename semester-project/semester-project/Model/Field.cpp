@@ -19,19 +19,19 @@ void Field::setLocation(u_int32_t x, u_int32_t y) {
     location.y = y;
 }
 
-bool Field::isEmpty() {
+bool Field::isEmpty() const {
     return type == EMPTY_IDENTIFIER;
 }
 
-bool Field::isBlack() {
+bool Field::isBlack() const {
     return type == BLACK_IDENTIFIER;
 }
 
-bool Field::isWhite() {
+bool Field::isWhite() const {
     return type == WHITE_IDENTIFIER;
 }
 
-bool Field::isQueen() {
+bool Field::isQueen() const {
     return type == QUEEEN_IDENTIFIER;
 }
 

@@ -22,18 +22,21 @@ using namespace std;
 class ChessBoard {
 public:
 
+    const uint32_t size;
+
     uint32_t numberOfBlackPieces = 0;
+    uint32_t upperBound;
     Location queenLocation = Location(0, 0);
 
-    ChessBoard(uint32_t size);
+    ChessBoard(uint32_t size, uint32_t upperBound);
     ~ChessBoard();
 
     void setPiece(uint32_t x, uint32_t y, char value);
+    const Field& fieldAtLocation(uint32_t x, uint32_t y);
 
     friend ostream& operator << (ostream & os, const ChessBoard & chessboard);
 
 private:
-    const uint32_t size;
     Field **playArea;
 };
 
