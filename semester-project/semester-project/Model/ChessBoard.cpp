@@ -11,10 +11,10 @@
 using namespace std;
 
 ChessBoard::ChessBoard(uint32_t size): size(size) {
-    playArea = new char * [size];
+    playArea = new Field * [size];
 
-    for(uint32_t i = 0; i < size; ++i)
-        playArea[i] = new char[size] { 0 };
+    for(uint32_t x = 0; x < size; ++x)
+        playArea[x] = new Field[size];
 }
 
 ChessBoard::~ChessBoard() {
@@ -25,10 +25,16 @@ ChessBoard::~ChessBoard() {
 }
 
 void ChessBoard::setPiece(uint32_t x, uint32_t y, char value) {
-    playArea[x][y] = value;
+    Field& field = playArea[x][y];
 
-    if(value == BLACK_IDENTIFIER)
+    field.setLocation(x, y);
+    field.setType(value);
+
+    if(field.isBlack())
         ++numberOfBlackPieces;
+
+    if(field.isQueen())
+        queenLocation = field.location;
 }
 
 ostream& operator << (ostream & os, const ChessBoard & chessboard) {

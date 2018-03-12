@@ -13,18 +13,17 @@
 #include <iostream>
 #include <fstream>
 
+#include "Field.hpp"
+#include "Location.hpp"
+
 using namespace std;
 
 // Represents the chessboard play area
 class ChessBoard {
 public:
 
-    static const char EMPTY_IDENTIFIER = '0';
-    static const char BLACK_IDENTIFIER = '1';
-    static const char WHITE_IDENTIFIER = '2';
-    static const char QUEEEN_IDENTIFIER = '3';
-
     uint32_t numberOfBlackPieces = 0;
+    Location queenLocation = Location(0, 0);
 
     ChessBoard(uint32_t size);
     ~ChessBoard();
@@ -35,7 +34,7 @@ public:
 
 private:
     const uint32_t size;
-    char **playArea;
+    Field **playArea;
 };
 
 

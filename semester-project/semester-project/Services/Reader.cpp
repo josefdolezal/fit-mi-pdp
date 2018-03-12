@@ -6,17 +6,19 @@
 //  Copyright © 2018 Josef Dolezal. All rights reserved.
 //
 
-#include "Reader.hpp"
 #include <cstdio>
 #include <iostream>
 #include <fstream>
+
+#include "Reader.hpp"
+#include "Field.hpp"
 
 using namespace std;
 
 ChessBoard Reader::readInput(const char * &file) {
     ifstream read(file);
     int32_t size, upperBound;
-    char c = ChessBoard::EMPTY_IDENTIFIER;
+    char c = Field::EMPTY_IDENTIFIER;
 
     // Read the chessboard size and upperbound from given file
     read >> size >> upperBound;
