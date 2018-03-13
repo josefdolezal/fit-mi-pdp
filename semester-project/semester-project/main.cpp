@@ -25,7 +25,7 @@ int main(int argc, const char * argv[]) {
 
         cout << "::::: File: " << fileName << " :::::"  << endl;
         cout << "Minimal steps needed: " << solution.size() - 1 << endl;
-        cout << solution.size() << endl;
+        cout << solution << endl;
         cout << "::::: Time: " << Time().delta(start) << " :::::" << endl << endl;
     }
 

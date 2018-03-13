@@ -24,12 +24,14 @@ void PiecesMinimalCoverage::findPath(const Location &location, CoverageSolution 
                                      uint32_t currentDepth, uint32_t blacksTaken) {
 
     // Check the terminating condition
-    if(currentDepth > chessboard.upperBound ||
-       currentDepth + (chessboard.upperBound - blacksTaken) >= bestSolution.size())
+    if(bestSolution.size() - 1 == chessboard.numberOfBlackPieces ||
+       currentDepth > chessboard.upperBound ||
+       currentDepth + (chessboard.numberOfBlackPieces - blacksTaken) >= bestSolution.size())
         return;
 
+
     // Checke if the is taken in this step
-    bool isBlackTaken = chessboard.fieldAtLocation(location.x, location.y).isBlack();
+    bool isBlackTaken = chessboard.fieldAtLocation(location.x, location.y).isBlack() && !currentSolution.isTaken(location);
 
     // Add informations about about current step
     currentSolution.add(location, isBlackTaken);
@@ -76,6 +78,7 @@ void PiecesMinimalCoverage::scheduleMovement(int32_t x, int32_t y, uint32_t dire
         if(field.isBlack() && !currentSolution.isTaken(field.location)) {
             // Prepend this move to be taken with higher priority
             itenary.insert(itenary.begin(), field.location);
+            return;
         } else if(field.isWhite()) {
             return;
         } else if(field.isEmpty()) {
