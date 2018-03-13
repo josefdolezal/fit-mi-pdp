@@ -10,6 +10,7 @@
 #include "Reader.hpp"
 #include "ChessBoard.hpp"
 #include "PiecesMinimalCoverage.hpp"
+#include "Time.hpp"
 
 using namespace std;
 
@@ -19,10 +20,13 @@ int main(int argc, const char * argv[]) {
         const char* fileName = argv[i];
         ChessBoard chessboard = Reader::readInput(fileName);
         PiecesMinimalCoverage solver(chessboard);
+        Time start;
+        CoverageSolution solution = solver.minimalCoverage();
 
         cout << "::::: File: " << fileName << " :::::"  << endl;
-        cout << solver.minimalCoverage() << endl;
-        cout << "::::: Time: " << 0 << ":::::" << endl;
+        cout << "Minimal steps needed: " << solution.size() - 1 << endl;
+        cout << solution.size() << endl;
+        cout << "::::: Time: " << Time().delta(start) << " :::::" << endl << endl;
     }
 
     return 0;
