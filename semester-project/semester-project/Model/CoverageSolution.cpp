@@ -30,9 +30,9 @@ bool CoverageSolution::isTaken(const Location &location) const {
 
 ostream& operator << (ostream &os, const CoverageSolution &solution) {
     for(auto &step: solution.steps) {
-        char taken = step.second ? '\0' : '*';
+        char taken = step.second ? '*' : '\0';
 
-        os << step.first << taken;
+        os << step.first << taken << " ";
     }
 
     return os;

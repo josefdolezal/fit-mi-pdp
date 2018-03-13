@@ -67,10 +67,13 @@ void PiecesMinimalCoverage::scheduleMovements(const Location &location, vector<L
 void PiecesMinimalCoverage::scheduleMovement(int32_t x, int32_t y, uint32_t directionX, uint32_t directionY,
                                              vector<Location> &itenary, const CoverageSolution &currentSolution) {
 
+    x += directionX;
+    y += directionY;
+
     while(x >= 0 && y >= 0 && x < chessboard.size && y < chessboard.size) {
         const Field &field = chessboard.fieldAtLocation(x, y);
 
-        if(field.isBlack() && currentSolution.isTaken(field.location)) {
+        if(field.isBlack() && !currentSolution.isTaken(field.location)) {
             // Prepend this move to be taken with higher priority
             itenary.insert(itenary.begin(), field.location);
         } else if(field.isWhite()) {
