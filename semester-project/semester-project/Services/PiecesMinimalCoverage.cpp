@@ -45,8 +45,11 @@ void PiecesMinimalCoverage::findPath(const Location &location, CoverageSolution 
         return;
     }
 
+    if(currentDepth + 1 > chessboard.upperBound)
+        return;
+
     // Create itenary with next steps and explore them
-    vector<Location> itenary;
+    deque<Location> itenary;
     scheduleMovements(location, itenary, currentSolution);
 
     // Recursive call
@@ -54,7 +57,7 @@ void PiecesMinimalCoverage::findPath(const Location &location, CoverageSolution 
         findPath(step, currentSolution, currentDepth + 1, blacksTaken);
 }
 
-void PiecesMinimalCoverage::scheduleMovements(const Location &location, vector<Location> &itenary,
+void PiecesMinimalCoverage::scheduleMovements(const Location &location, deque<Location> &itenary,
                                               const CoverageSolution &currentSolution) {
 
     // Create all possible directions and move along them
@@ -67,7 +70,7 @@ void PiecesMinimalCoverage::scheduleMovements(const Location &location, vector<L
 }
 
 void PiecesMinimalCoverage::scheduleMovement(int32_t x, int32_t y, uint32_t directionX, uint32_t directionY,
-                                             vector<Location> &itenary, const CoverageSolution &currentSolution) {
+                                             deque<Location> &itenary, const CoverageSolution &currentSolution) {
 
     x += directionX;
     y += directionY;
@@ -77,7 +80,7 @@ void PiecesMinimalCoverage::scheduleMovement(int32_t x, int32_t y, uint32_t dire
 
         if(field.isBlack() && !currentSolution.isTaken(field.location)) {
             // Prepend this move to be taken with higher priority
-            itenary.insert(itenary.begin(), field.location);
+            itenary.push_front(field.location);
             return;
         } else if(field.isWhite()) {
             return;
