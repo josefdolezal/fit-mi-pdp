@@ -60,11 +60,6 @@ void PiecesMinimalCoverage::findPath(const Location &location, CoverageSolution 
 void PiecesMinimalCoverage::scheduleMovements(const Location &location, deque<Location> &itenary,
                                               const CoverageSolution &currentSolution) {
 
-    // Create all possible directions and move along them
-    pair<uint32_t, uint32_t> directions[8] = {
-        make_pair(1, 0), make_pair(1, 1), make_pair(0, 1), make_pair(-1, 1),
-        make_pair(-1, 0), make_pair(-1, -1), make_pair(0, -1), make_pair(1, -1) };
-
     for(auto &direction : directions)
         scheduleMovement(location.x, location.y, direction.first, direction.second, itenary, currentSolution);
 }
