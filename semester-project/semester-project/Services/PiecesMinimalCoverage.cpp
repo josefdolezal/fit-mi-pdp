@@ -72,10 +72,12 @@ void PiecesMinimalCoverage::scheduleMovements(const Location &location, deque<Lo
 void PiecesMinimalCoverage::scheduleMovement(int32_t x, int32_t y, uint32_t directionX, uint32_t directionY,
                                              deque<Location> &itenary, const CoverageSolution &currentSolution) {
 
+    int32_t chessboardSize = (int32_t) chessboard.size;
+
     x += directionX;
     y += directionY;
 
-    while(x >= 0 && y >= 0 && x < chessboard.size && y < chessboard.size) {
+    while(x >= 0 && y >= 0 && x < chessboardSize && y < chessboardSize) {
         const Field &field = chessboard.fieldAtLocation(x, y);
 
         if(field.isBlack() && !currentSolution.isTaken(field.location)) {

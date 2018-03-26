@@ -26,8 +26,8 @@ ChessBoard Reader::readInput(const char * &file) {
     ChessBoard chessboard(size, upperBound);
 
     // Read the actual chessboard values
-    for(uint32_t y = 0; y < size; ++y) {
-        for (uint32_t x = 0; x < size; ++x) {
+    for(int32_t y = 0; y < size; ++y) {
+        for (int32_t x = 0; x < size; ++x) {
             read >> c;
             chessboard.setPiece(x, y, c);
         }
