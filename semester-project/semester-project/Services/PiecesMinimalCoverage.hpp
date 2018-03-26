@@ -11,6 +11,7 @@
 
 #include <cstdio>
 #include <deque>
+#include <omp.h>
 
 #include "ChessBoard.hpp"
 #include "CoverageSolution.hpp"

@@ -14,8 +14,12 @@ PiecesMinimalCoverage::PiecesMinimalCoverage(ChessBoard &chessboard):
 CoverageSolution PiecesMinimalCoverage::minimalCoverage() {
     CoverageSolution initialSolution;
 
-    // Kick-off the recursive path finding
-    findPath(chessboard.queenLocation, initialSolution, 0, 0);
+    # pragma omp parallel
+    {
+        // Kick-off the recursive path finding
+        # pragma omp single
+        findPath(chessboard.queenLocation, initialSolution, 0, 0);
+    }
 
     return bestSolution;
 }
@@ -39,8 +43,12 @@ void PiecesMinimalCoverage::findPath(const Location &location, CoverageSolution 
 
     // All black pieces are taken, check for the optimality and stop this branch
     if(blacksTaken == chessboard.numberOfBlackPieces) {
-        if(currentSolution.size() < bestSolution.size())
-            bestSolution = currentSolution;
+        // Check the result without creating lock
+        if(currentSolution.size() < bestSolution.size()) {
+            // Create the lock and check again
+            #pragma omp critical
+            if(currentSolution.size() < bestSolution.size()) bestSolution = currentSolution;
+        }
 
         return;
     }
@@ -54,7 +62,10 @@ void PiecesMinimalCoverage::findPath(const Location &location, CoverageSolution 
 
     // Recursive call
     for(auto &step: itenary)
+        #pragma omp task
         findPath(step, currentSolution, currentDepth + 1, blacksTaken);
+
+    #pragma omp taskwait
 }
 
 void PiecesMinimalCoverage::scheduleMovements(const Location &location, deque<Location> &itenary,
