@@ -64,8 +64,6 @@ void PiecesMinimalCoverage::findPath(const Location &location, CoverageSolution 
     for(auto &step: itenary)
         #pragma omp task
         findPath(step, currentSolution, currentDepth + 1, blacksTaken);
-
-    #pragma omp taskwait
 }
 
 void PiecesMinimalCoverage::scheduleMovements(const Location &location, deque<Location> &itenary,
