@@ -7,6 +7,7 @@
 //
 
 #include <iostream>
+#include <string>
 #include "Reader.hpp"
 #include "ChessBoard.hpp"
 #include "PiecesMinimalCoverage.hpp"
@@ -14,9 +15,24 @@
 
 using namespace std;
 
+void printUsage(const string& progName);
+
 int main(int argc, const char * argv[]) {
+    if(argc < 3) {
+        printUsage(argv[0]);
+        exit(1);
+    }
+
+    string mode(argv[1]);
+
+    if(mode != "task-p" && mode != "data-p") {
+        printUsage(argv[0]);
+        cout << "Error: <mode> must have either \"data-p\" or \"task-p\" value." << endl;
+        exit(1);
+    }
+
     // Run the solution for each file from given list
-    for(int i = 1; i < argc; ++i) {
+    for(int i = 2; i < argc; ++i) {
         const char* fileName = argv[i];
         ChessBoard chessboard = Reader::readInput(fileName);
         PiecesMinimalCoverage solver(chessboard);
@@ -30,4 +46,8 @@ int main(int argc, const char * argv[]) {
     }
 
     return 0;
+}
+
+void printUsage(const string& progName) {
+    cout << "Usage: " << progName << " <mode>" << " input [input ...]" << endl;
 }
