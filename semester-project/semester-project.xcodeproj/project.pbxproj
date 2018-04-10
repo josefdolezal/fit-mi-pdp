@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D20DEA21207CC96A001DD12E /* DataParameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D20DEA1F207CC96A001DD12E /* DataParameters.cpp */; };
 		D23977F120545BF10033269C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D23977F020545BF10033269C /* main.cpp */; };
 		D23977F92055380E0033269C /* Reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D23977F72055380E0033269C /* Reader.cpp */; };
 		D23977FF205697580033269C /* ChessBoard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D23977FD205697580033269C /* ChessBoard.cpp */; };
@@ -31,6 +32,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D20DEA1F207CC96A001DD12E /* DataParameters.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DataParameters.cpp; sourceTree = "<group>"; };
+		D20DEA20207CC96A001DD12E /* DataParameters.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DataParameters.hpp; sourceTree = "<group>"; };
 		D23977ED20545BF10033269C /* semester-project */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "semester-project"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D23977F020545BF10033269C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D23977F72055380E0033269C /* Reader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Reader.cpp; sourceTree = "<group>"; };
@@ -113,6 +116,8 @@
 				D23978092056E2B10033269C /* PiecesMinimalCoverage.hpp */,
 				D239780E2057DE3C0033269C /* Time.cpp */,
 				D239780F2057DE3C0033269C /* Time.hpp */,
+				D20DEA1F207CC96A001DD12E /* DataParameters.cpp */,
+				D20DEA20207CC96A001DD12E /* DataParameters.hpp */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -188,6 +193,7 @@
 				D239780D2056E3F00033269C /* CoverageSolution.cpp in Sources */,
 				D239780A2056E2B10033269C /* PiecesMinimalCoverage.cpp in Sources */,
 				D23978042056B3EE0033269C /* Field.cpp in Sources */,
+				D20DEA21207CC96A001DD12E /* DataParameters.cpp in Sources */,
 				D23977F120545BF10033269C /* main.cpp in Sources */,
 				D23978072056E0660033269C /* Location.cpp in Sources */,
 			);
