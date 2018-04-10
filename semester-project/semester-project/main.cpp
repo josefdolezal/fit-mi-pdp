@@ -11,6 +11,7 @@
 #include "Reader.hpp"
 #include "ChessBoard.hpp"
 #include "PiecesMinimalCoverage.hpp"
+#include "DataOrientedCoverage.hpp"
 #include "Time.hpp"
 
 using namespace std;
@@ -35,7 +36,7 @@ int main(int argc, const char * argv[]) {
     for(int i = 2; i < argc; ++i) {
         const char* fileName = argv[i];
         ChessBoard chessboard = Reader::readInput(fileName);
-        PiecesMinimalCoverage solver(chessboard);
+        DataOrientedCoverage solver(chessboard);
         Time start;
         CoverageSolution solution = solver.minimalCoverage();
 

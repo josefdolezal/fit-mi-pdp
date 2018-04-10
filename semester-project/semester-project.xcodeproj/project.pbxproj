@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D20DEA1E207CC71D001DD12E /* DataOrientedCoverage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D20DEA1C207CC71D001DD12E /* DataOrientedCoverage.cpp */; };
 		D20DEA21207CC96A001DD12E /* DataParameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D20DEA1F207CC96A001DD12E /* DataParameters.cpp */; };
 		D23977F120545BF10033269C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D23977F020545BF10033269C /* main.cpp */; };
 		D23977F92055380E0033269C /* Reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D23977F72055380E0033269C /* Reader.cpp */; };
@@ -32,6 +33,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D20DEA1C207CC71D001DD12E /* DataOrientedCoverage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DataOrientedCoverage.cpp; sourceTree = "<group>"; };
+		D20DEA1D207CC71D001DD12E /* DataOrientedCoverage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DataOrientedCoverage.hpp; sourceTree = "<group>"; };
 		D20DEA1F207CC96A001DD12E /* DataParameters.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DataParameters.cpp; sourceTree = "<group>"; };
 		D20DEA20207CC96A001DD12E /* DataParameters.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DataParameters.hpp; sourceTree = "<group>"; };
 		D23977ED20545BF10033269C /* semester-project */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "semester-project"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +119,8 @@
 				D23978092056E2B10033269C /* PiecesMinimalCoverage.hpp */,
 				D239780E2057DE3C0033269C /* Time.cpp */,
 				D239780F2057DE3C0033269C /* Time.hpp */,
+				D20DEA1C207CC71D001DD12E /* DataOrientedCoverage.cpp */,
+				D20DEA1D207CC71D001DD12E /* DataOrientedCoverage.hpp */,
 				D20DEA1F207CC96A001DD12E /* DataParameters.cpp */,
 				D20DEA20207CC96A001DD12E /* DataParameters.hpp */,
 			);
@@ -188,6 +193,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D23978102057DE3C0033269C /* Time.cpp in Sources */,
+				D20DEA1E207CC71D001DD12E /* DataOrientedCoverage.cpp in Sources */,
 				D23977FF205697580033269C /* ChessBoard.cpp in Sources */,
 				D23977F92055380E0033269C /* Reader.cpp in Sources */,
 				D239780D2056E3F00033269C /* CoverageSolution.cpp in Sources */,
