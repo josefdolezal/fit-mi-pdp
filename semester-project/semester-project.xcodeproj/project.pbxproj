@@ -54,6 +54,7 @@
 		D239780E2057DE3C0033269C /* Time.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Time.cpp; sourceTree = "<group>"; };
 		D239780F2057DE3C0033269C /* Time.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Time.hpp; sourceTree = "<group>"; };
 		D2A2039D205FC03C0040E25B /* libomp.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libomp.dylib; path = ../../../../../../../usr/local/Cellar/llvm/6.0.0/lib/libomp.dylib; sourceTree = "<group>"; };
+		D2ABBEE2207E20BC0065F9A9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +72,7 @@
 		D23977E420545BF10033269C = {
 			isa = PBXGroup;
 			children = (
+				D2ABBEE2207E20BC0065F9A9 /* README.md */,
 				D23977EF20545BF10033269C /* semester-project */,
 				D23977EE20545BF10033269C /* Products */,
 				D2A2039C205FC03B0040E25B /* Frameworks */,
