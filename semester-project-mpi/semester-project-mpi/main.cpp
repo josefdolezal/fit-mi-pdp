@@ -8,6 +8,8 @@
 
 #include <iostream>
 #include <string>
+#include <mpi.h>
+
 #include "Reader.hpp"
 #include "ChessBoard.hpp"
 #include "Time.hpp"

@@ -293,6 +293,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = "/usr/local/Cellar/open-mpi/3.0.1/include";
+				LIBRARY_SEARCH_PATHS = (
+					"/usr/local/Cellar/open-mpi/3.0.1/lib",
+					/usr/local/opt/libevent/lib,
+				);
+				OTHER_LDFLAGS = "-lmpi";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -301,6 +307,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = "/usr/local/Cellar/open-mpi/3.0.1/include";
+				LIBRARY_SEARCH_PATHS = (
+					"/usr/local/Cellar/open-mpi/3.0.1/lib",
+					/usr/local/opt/libevent/lib,
+				);
+				OTHER_LDFLAGS = "-lmpi";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
