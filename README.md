@@ -9,6 +9,14 @@ Pro správné fungování je potřeba doinstalovat `clang` s knihovnou OpenMP. P
 $ brew install llvm
 ```
 
+### OpenMPI v Xcode
+
+Pro nalinkování OpenMPI je potřeba pomocí `brew` knihovnu doinstalovat. V nastavení projektu je potřeba přidat hlavičky a spouštět binárku pomocí `mpirun`, návod [zde](https://stackoverflow.com/a/31525928/9016753).
+
+```bash
+$ brew install open-mpi
+```
+
 ### Spouštění na Star
 
 ```
