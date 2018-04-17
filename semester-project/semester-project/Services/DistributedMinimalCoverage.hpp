@@ -34,6 +34,9 @@ private:
     char **arguments;
     int * serializationBuffer;
 
+    int serialize(DataParameters&);
+    DataParameters deserialize();
+
     void findSolution();
     void scheduleMovements(const Location&, deque<Location>&, const CoverageSolution&);
     void scheduleMovement(int32_t, int32_t, uint32_t, uint32_t, deque<Location>&, const CoverageSolution&);

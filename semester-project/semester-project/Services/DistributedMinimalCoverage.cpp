@@ -140,3 +140,44 @@ void DistributedMinimalCoverage::scheduleMovement(int32_t x, int32_t y, uint32_t
         y += directionY;
     }
 }
+
+// MARK: Serialization
+
+// Send object into buffer
+int DistributedMinimalCoverage::serialize(DataParameters &parameters) {
+    int* b = serializationBuffer;
+    int solutionSize = (int)parameters.currentSolution.size();
+    int size = 5 + solutionSize;
+
+    b[0] = size;
+    b[1] = parameters.location.x;
+    b[2] = parameters.location.y;
+    b[3] = parameters.currentDepth;
+    b[4] = parameters.blacksTaken;
+
+    for(int step = 0; step < solutionSize; ++step) {
+        int index = 5 + step * 3;
+        pair<Location, bool>& p = parameters.currentSolution.steps.at(step);
+
+        b[index] = p.first.x;
+        b[index+1] = p.first.y;
+        b[index+2] = p.second ? 1 : 0;
+    }
+
+    return size;
+}
+
+// Recieve object from buffer
+DataParameters DistributedMinimalCoverage::deserialize() {
+    int* b = serializationBuffer;
+    int size = b[0];
+    Location location(b[1], b[2]);
+    CoverageSolution solution;
+
+    for(int index = 5; index < size; index += 3) {
+        Location stepLocation(b[index], b[index+1]);
+        solution.add(stepLocation, b[index+2] == 1);
+    }
+
+    return DataParameters(location, solution, b[3], b[4]);
+}
