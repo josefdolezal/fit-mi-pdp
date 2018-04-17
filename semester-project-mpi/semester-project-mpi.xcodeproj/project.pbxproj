@@ -15,6 +15,7 @@
 		D265A09D2084A5F500F6FCC4 /* Reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D265A0982084A5F400F6FCC4 /* Reader.cpp */; };
 		D265A09E2084A5F500F6FCC4 /* DataParameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D265A0992084A5F400F6FCC4 /* DataParameters.cpp */; };
 		D265A0A02084A62000F6FCC4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D265A09F2084A62000F6FCC4 /* main.cpp */; };
+		D265A0A32084AB0600F6FCC4 /* DistributedMinimalCoverage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D265A0A12084AB0600F6FCC4 /* DistributedMinimalCoverage.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,6 +47,8 @@
 		D265A09A2084A5F400F6FCC4 /* Time.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Time.hpp; sourceTree = "<group>"; };
 		D265A09B2084A5F400F6FCC4 /* Reader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Reader.hpp; sourceTree = "<group>"; };
 		D265A09F2084A62000F6FCC4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		D265A0A12084AB0600F6FCC4 /* DistributedMinimalCoverage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DistributedMinimalCoverage.cpp; sourceTree = "<group>"; };
+		D265A0A22084AB0600F6FCC4 /* DistributedMinimalCoverage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DistributedMinimalCoverage.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +113,8 @@
 				D265A09B2084A5F400F6FCC4 /* Reader.hpp */,
 				D265A0972084A5F400F6FCC4 /* Time.cpp */,
 				D265A09A2084A5F400F6FCC4 /* Time.hpp */,
+				D265A0A12084AB0600F6FCC4 /* DistributedMinimalCoverage.cpp */,
+				D265A0A22084AB0600F6FCC4 /* DistributedMinimalCoverage.hpp */,
 			);
 			name = Services;
 			path = "../../semester-project/semester-project/Services";
@@ -178,6 +183,7 @@
 				D265A0932084A5B600F6FCC4 /* Field.cpp in Sources */,
 				D265A0912084A5B600F6FCC4 /* ChessBoard.cpp in Sources */,
 				D265A09D2084A5F500F6FCC4 /* Reader.cpp in Sources */,
+				D265A0A32084AB0600F6FCC4 /* DistributedMinimalCoverage.cpp in Sources */,
 				D265A0A02084A62000F6FCC4 /* main.cpp in Sources */,
 				D265A0942084A5B600F6FCC4 /* Location.cpp in Sources */,
 			);
@@ -300,6 +306,10 @@
 				);
 				OTHER_LDFLAGS = "-lmpi";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-pedantic",
+				);
 			};
 			name = Debug;
 		};
@@ -314,6 +324,10 @@
 				);
 				OTHER_LDFLAGS = "-lmpi";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-pedantic",
+				);
 			};
 			name = Release;
 		};

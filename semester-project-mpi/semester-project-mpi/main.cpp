@@ -8,28 +8,28 @@
 
 #include <iostream>
 #include <string>
-#include <mpi.h>
 
 #include "Reader.hpp"
 #include "ChessBoard.hpp"
 #include "Time.hpp"
+#include "DistributedMinimalCoverage.hpp"
 
 using namespace std;
 
 void printUsage(const string& progName);
 
-int main(int argc, const char * argv[]) {
+int main(int argc, char * argv[]) {
     // Run the solution for each file from given list
     for(int i = 1; i < argc; ++i) {
         const char* fileName = argv[i];
         ChessBoard chessboard = Reader::readInput(fileName);
-        // Create solver
+        DistributedMinimalCoverage solver(chessboard, argc, argv);
         Time start;
-        // Find the solution
+        CoverageSolution solution = solver.minimalCoverage();
 
         cout << "::::: File: " << fileName << " :::::"  << endl;
-        cout << "Minimal steps needed: " << "<solution.steps>" << endl;
-        cout << "<solution.path>" << endl;
+        cout << "Minimal steps needed: " << solution.size() - 1 << endl;
+        cout << solution << endl;
         cout << "::::: Time: " << Time().delta(start) << " :::::" << endl << endl;
     }
 
