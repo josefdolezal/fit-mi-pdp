@@ -21,6 +21,8 @@ class CoverageSolution {
 public:
     CoverageSolution(uint32_t size = 0);
 
+    vector<pair<Location, bool>> steps;
+
     size_t size() const;
     void add(const Location &, bool taken);
     bool isTaken(const Location &) const;
@@ -30,7 +32,6 @@ public:
 private:
     uint32_t solutionSize = 0;
 
-    vector<pair<Location, bool>> steps;
     map<pair<uint32_t, uint32_t>, bool> takens;
 };
 
