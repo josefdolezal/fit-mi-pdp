@@ -49,7 +49,7 @@ CoverageSolution DistributedMinimalCoverage::minimalCoverage() {
 
 void DistributedMinimalCoverage::scheduleWork() {
     deque<DataParameters> parametersQueue;
-    uint32_t maxQueueSize = 8;
+    uint32_t maxQueueSize = 20;
     CoverageSolution initialSolution;
     DataParameters initialParameters(chessboard.queenLocation, initialSolution, 0, 0);
 
