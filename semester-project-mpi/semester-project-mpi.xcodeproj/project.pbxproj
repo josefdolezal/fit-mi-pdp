@@ -17,6 +17,7 @@
 		D265A0A02084A62000F6FCC4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D265A09F2084A62000F6FCC4 /* main.cpp */; };
 		D265A0A32084AB0600F6FCC4 /* DistributedMinimalCoverage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D265A0A12084AB0600F6FCC4 /* DistributedMinimalCoverage.cpp */; };
 		D2C65ECB208BEA6F0088DB3D /* DataOrientedCoverage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C65EC9208BEA6F0088DB3D /* DataOrientedCoverage.cpp */; };
+		D2C65ECE208BEBD20088DB3D /* libomp.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C65ECD208BEBD20088DB3D /* libomp.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -52,6 +53,7 @@
 		D265A0A22084AB0600F6FCC4 /* DistributedMinimalCoverage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DistributedMinimalCoverage.hpp; sourceTree = "<group>"; };
 		D2C65EC9208BEA6F0088DB3D /* DataOrientedCoverage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataOrientedCoverage.cpp; sourceTree = "<group>"; };
 		D2C65ECA208BEA6F0088DB3D /* DataOrientedCoverage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DataOrientedCoverage.hpp; sourceTree = "<group>"; };
+		D2C65ECD208BEBD20088DB3D /* libomp.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libomp.dylib; path = ../../../../../../../usr/local/Cellar/llvm/6.0.0/lib/libomp.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2C65ECE208BEBD20088DB3D /* libomp.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +73,7 @@
 			children = (
 				D265A0802084A59C00F6FCC4 /* semester-project-mpi */,
 				D265A07F2084A59C00F6FCC4 /* Products */,
+				D2C65ECC208BEBD20088DB3D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -123,6 +127,14 @@
 			);
 			name = Services;
 			path = "../../semester-project/semester-project/Services";
+			sourceTree = "<group>";
+		};
+		D2C65ECC208BEBD20088DB3D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D2C65ECD208BEBD20088DB3D /* libomp.dylib */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,12 +316,19 @@
 		D265A0862084A59C00F6FCC4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CC = /usr/local/opt/llvm/bin/clang;
 				CODE_SIGN_STYLE = Automatic;
-				HEADER_SEARCH_PATHS = "/usr/local/Cellar/open-mpi/3.0.1/include";
+				HEADER_SEARCH_PATHS = (
+					"/usr/local/Cellar/open-mpi/3.0.1/include",
+					/usr/local/opt/llvm/lib/clang/6.0.0/include,
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"/usr/local/Cellar/open-mpi/3.0.1/lib",
 					/usr/local/opt/libevent/lib,
+					/usr/local/opt/llvm/lib,
+					/usr/local/Cellar/llvm/6.0.0/lib,
 				);
+				OTHER_CFLAGS = "-fopenmp";
 				OTHER_LDFLAGS = "-lmpi";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WARNING_CFLAGS = (
@@ -322,12 +341,19 @@
 		D265A0872084A59C00F6FCC4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CC = /usr/local/opt/llvm/bin/clang;
 				CODE_SIGN_STYLE = Automatic;
-				HEADER_SEARCH_PATHS = "/usr/local/Cellar/open-mpi/3.0.1/include";
+				HEADER_SEARCH_PATHS = (
+					"/usr/local/Cellar/open-mpi/3.0.1/include",
+					/usr/local/opt/llvm/lib/clang/6.0.0/include,
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"/usr/local/Cellar/open-mpi/3.0.1/lib",
 					/usr/local/opt/libevent/lib,
+					/usr/local/opt/llvm/lib,
+					/usr/local/Cellar/llvm/6.0.0/lib,
 				);
+				OTHER_CFLAGS = "-fopenmp";
 				OTHER_LDFLAGS = "-lmpi";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WARNING_CFLAGS = (
