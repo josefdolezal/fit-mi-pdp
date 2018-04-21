@@ -16,6 +16,7 @@
 		D265A09E2084A5F500F6FCC4 /* DataParameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D265A0992084A5F400F6FCC4 /* DataParameters.cpp */; };
 		D265A0A02084A62000F6FCC4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D265A09F2084A62000F6FCC4 /* main.cpp */; };
 		D265A0A32084AB0600F6FCC4 /* DistributedMinimalCoverage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D265A0A12084AB0600F6FCC4 /* DistributedMinimalCoverage.cpp */; };
+		D2C65ECB208BEA6F0088DB3D /* DataOrientedCoverage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D2C65EC9208BEA6F0088DB3D /* DataOrientedCoverage.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,6 +50,8 @@
 		D265A09F2084A62000F6FCC4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D265A0A12084AB0600F6FCC4 /* DistributedMinimalCoverage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DistributedMinimalCoverage.cpp; sourceTree = "<group>"; };
 		D265A0A22084AB0600F6FCC4 /* DistributedMinimalCoverage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DistributedMinimalCoverage.hpp; sourceTree = "<group>"; };
+		D2C65EC9208BEA6F0088DB3D /* DataOrientedCoverage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataOrientedCoverage.cpp; sourceTree = "<group>"; };
+		D2C65ECA208BEA6F0088DB3D /* DataOrientedCoverage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DataOrientedCoverage.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +118,8 @@
 				D265A09A2084A5F400F6FCC4 /* Time.hpp */,
 				D265A0A12084AB0600F6FCC4 /* DistributedMinimalCoverage.cpp */,
 				D265A0A22084AB0600F6FCC4 /* DistributedMinimalCoverage.hpp */,
+				D2C65EC9208BEA6F0088DB3D /* DataOrientedCoverage.cpp */,
+				D2C65ECA208BEA6F0088DB3D /* DataOrientedCoverage.hpp */,
 			);
 			name = Services;
 			path = "../../semester-project/semester-project/Services";
@@ -182,6 +187,7 @@
 				D265A0922084A5B600F6FCC4 /* CoverageSolution.cpp in Sources */,
 				D265A0932084A5B600F6FCC4 /* Field.cpp in Sources */,
 				D265A0912084A5B600F6FCC4 /* ChessBoard.cpp in Sources */,
+				D2C65ECB208BEA6F0088DB3D /* DataOrientedCoverage.cpp in Sources */,
 				D265A09D2084A5F500F6FCC4 /* Reader.cpp in Sources */,
 				D265A0A32084AB0600F6FCC4 /* DistributedMinimalCoverage.cpp in Sources */,
 				D265A0A02084A62000F6FCC4 /* main.cpp in Sources */,
