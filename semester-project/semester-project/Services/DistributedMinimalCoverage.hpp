@@ -30,9 +30,15 @@ private:
         make_pair(1, 0), make_pair(1, 1), make_pair(0, 1), make_pair(-1, 1),
         make_pair(-1, 0), make_pair(-1, -1), make_pair(0, -1), make_pair(1, -1) };
 
+    static int TAG_FINISHED;
+    static int TAG_WORK;
+    static int TAG_SOLUTION;
+    static int TAG_FAILED;
+
     int argumentsCount;
     char **arguments;
     int * serializationBuffer;
+    int bufferSize;
 
     int serialize(DataParameters&);
     DataParameters deserialize();
@@ -42,7 +48,7 @@ private:
     void scheduleMovement(int32_t, int32_t, uint32_t, uint32_t, deque<Location>&, const CoverageSolution&);
 
     void scheduleWork();
-    void receiveWork(MPI_Status&);
+    void receiveWork();
     bool isScheduler(int);
 };
 

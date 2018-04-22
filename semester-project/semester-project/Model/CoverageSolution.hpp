@@ -27,6 +27,8 @@ public:
     void add(const Location &, bool taken);
     bool isTaken(const Location &) const;
 
+    bool isActualSolution = false;
+
     friend ostream& operator << (ostream &, const CoverageSolution &);
 
 private:

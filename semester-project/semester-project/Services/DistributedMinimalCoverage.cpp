@@ -12,6 +12,11 @@
 #include "DataParameters.hpp"
 #include "DataOrientedCoverage.hpp"
 
+int DistributedMinimalCoverage::TAG_WORK = 0;
+int DistributedMinimalCoverage::TAG_FINISHED = 1;
+int DistributedMinimalCoverage::TAG_SOLUTION = 3;
+int DistributedMinimalCoverage::TAG_FAILED = 4;
+
 // MARK: Life cycle
 
 DistributedMinimalCoverage::DistributedMinimalCoverage(ChessBoard& chessboard, int argumentsCount, char** arguments)
@@ -19,8 +24,8 @@ DistributedMinimalCoverage::DistributedMinimalCoverage(ChessBoard& chessboard, i
       argumentsCount(argumentsCount), arguments(arguments) {
 
     // length + x + y + depth + taken + (x, y, taken) * upperBound
-    int bufferSize = 5 + (3 * chessboard.upperBound);
 
+    bufferSize = 5 + (3 * chessboard.upperBound);
     serializationBuffer = new int[bufferSize];
 }
 
@@ -32,30 +37,31 @@ DistributedMinimalCoverage::~DistributedMinimalCoverage() {
 
 CoverageSolution DistributedMinimalCoverage::minimalCoverage() {
     int rank;
-
-    MPI_Status status;
     MPI_Init(&argumentsCount, &arguments);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
     if(isScheduler(rank)) {
         scheduleWork();
     } else {
-        receiveWork(status);
+        receiveWork();
     }
 
     MPI_Finalize();
 
-    return CoverageSolution();
+    bestSolution.isActualSolution = true;
+    return bestSolution;
 }
 
 // MARK: MPI
 
 void DistributedMinimalCoverage::scheduleWork() {
+    int numberOfProcesses;
     deque<DataParameters> parametersQueue;
     uint32_t maxQueueSize = 20;
     CoverageSolution initialSolution;
     DataParameters initialParameters(chessboard.queenLocation, initialSolution, 0, 0);
 
+    MPI_Comm_size(MPI_COMM_WORLD, &numberOfProcesses);
     parametersQueue.push_back(initialParameters);
 
     // Use BFS to create tasks
@@ -98,10 +104,87 @@ void DistributedMinimalCoverage::scheduleWork() {
             parametersQueue.push_back(neighbor);
         }
     }
+
+    // Send initial work to all processes
+    for(int destination = 1; destination < numberOfProcesses; destination++) {
+        if(!parametersQueue.empty()) {
+            DataParameters params = parametersQueue.front();
+            parametersQueue.pop_front();
+
+            serialize(params);
+            MPI_Send(serializationBuffer, bufferSize, MPI_INT, destination, TAG_WORK, MPI_COMM_WORLD);
+        }
+    }
+
+    MPI_Status status;
+
+    // Schedule the work for slaves
+    while(!parametersQueue.empty()) {
+        MPI_Recv(serializationBuffer, bufferSize, MPI_INT, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
+
+        if(status.MPI_TAG == TAG_SOLUTION) {
+            DataParameters solution = deserialize();
+
+            if(solution.currentSolution.size() < bestSolution.size()) {
+                bestSolution = solution;
+            }
+        }
+
+        DataParameters params = parametersQueue.front();
+        parametersQueue.pop_front();
+
+        serialize(params);
+        MPI_Send(serializationBuffer, bufferSize, MPI_INT, status.MPI_SOURCE, TAG_WORK, MPI_COMM_WORLD);
+    }
+
+    // Send information about finishing
+    for(int destination = 1; destination < numberOfProcesses; destination++) {
+        serializationBuffer[0] = 0;
+        MPI_Send(serializationBuffer, bufferSize, MPI_INT, destination, TAG_FINISHED, MPI_COMM_WORLD);
+    }
+
+    // Collect the results
+    for(int destination = 1; destination < numberOfProcesses; destination++) {
+        MPI_Status status;
+        MPI_Recv(serializationBuffer, bufferSize, MPI_INT, destination, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
+
+        if(status.MPI_TAG == TAG_SOLUTION) {
+            DataParameters solution = deserialize();
+
+            if(solution.currentSolution.size() < bestSolution.size()) {
+                bestSolution = solution.currentSolution;
+            }
+        }
+    }
 }
 
-void DistributedMinimalCoverage::receiveWork(MPI_Status& status) {
+void DistributedMinimalCoverage::receiveWork() {
+    MPI_Status status;
 
+    while(true) {
+        MPI_Recv(serializationBuffer, bufferSize, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
+
+        if(status.MPI_TAG == TAG_FINISHED) {
+            break;
+        } else {
+            DataOrientedCoverage solver(chessboard);
+            CoverageSolution solution = solver.minimalCoverage();
+
+            // Solution was found
+            if(solution.size() == chessboard.numberOfBlackPieces) {
+                DataParameters parameters(chessboard.queenLocation, solution, (int)solution.size(), chessboard.numberOfBlackPieces);
+
+                serialize(parameters);
+
+                MPI_Send(serializationBuffer, bufferSize, MPI_INT, 0, TAG_SOLUTION, MPI_COMM_WORLD);
+            }
+            // Solution was not found
+            else {
+                serializationBuffer[0] = 0;
+                MPI_Send(serializationBuffer, 1, MPI_INT, 0, TAG_FAILED, MPI_COMM_WORLD);
+            }
+        }
+    }
 }
 
 bool DistributedMinimalCoverage::isScheduler(int threadRank) {
