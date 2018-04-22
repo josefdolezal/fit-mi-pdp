@@ -16,10 +16,15 @@ using namespace std;
 DataOrientedCoverage::DataOrientedCoverage(ChessBoard& chessboard): chessboard(chessboard), bestSolution(CoverageSolution(3*chessboard.upperBound)) { }
 
 CoverageSolution DataOrientedCoverage::minimalCoverage() {
-    deque<DataParameters> parametersQueue;
-    uint32_t maxQueueSize = 8;
     CoverageSolution initialSolution;
     DataParameters initialParameters(chessboard.queenLocation, initialSolution, 0, 0);
+
+    return minimailCoverageWithInitial(initialParameters);
+}
+
+CoverageSolution DataOrientedCoverage::minimailCoverageWithInitial(DataParameters initialParameters) {
+    deque<DataParameters> parametersQueue;
+    uint32_t maxQueueSize = 8;
 
     parametersQueue.push_back(initialParameters);
 
@@ -37,29 +42,29 @@ CoverageSolution DataOrientedCoverage::minimalCoverage() {
            params.currentDepth > chessboard.upperBound ||
            params.currentDepth + (chessboard.numberOfBlackPieces - params.blacksTaken) >= bestSolution.size())
             continue;
-        
-        
+
+
         // Checke if the is taken in this step
         bool isBlackTaken = chessboard.fieldAtLocation(location.x, location.y).isBlack() && !currentSolution.isTaken(location);
-        
+
         // Add informations about about current step
         currentSolution.add(location, isBlackTaken);
         blacksTaken += isBlackTaken ? 1 : 0;
-        
+
         // All black pieces are taken, check for the optimality and stop this branch
         if(blacksTaken == chessboard.numberOfBlackPieces && currentSolution.size() < bestSolution.size()) {
             bestSolution = currentSolution;
 
             continue;
         }
-        
+
         if(currentDepth + 1 > chessboard.upperBound)
             continue;
-        
+
         // Create itenary with next steps and explore them
         deque<Location> itenary;
         scheduleMovements(location, itenary, currentSolution);
-        
+
         // Recursive call
         for(auto &step: itenary) {
             DataParameters neighbor = DataParameters(step, currentSolution, currentDepth + 1, blacksTaken);

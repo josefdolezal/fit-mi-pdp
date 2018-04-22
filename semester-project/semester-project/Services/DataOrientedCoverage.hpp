@@ -22,6 +22,7 @@ public:
     DataOrientedCoverage(ChessBoard &);
 
     CoverageSolution minimalCoverage();
+    CoverageSolution minimailCoverageWithInitial(DataParameters);
 private:
     ChessBoard &chessboard;
     CoverageSolution bestSolution;

@@ -10,6 +10,7 @@
 
 #include "DistributedMinimalCoverage.hpp"
 #include "DataParameters.hpp"
+#include "DataOrientedCoverage.hpp"
 
 // MARK: Life cycle
 
@@ -46,6 +47,8 @@ CoverageSolution DistributedMinimalCoverage::minimalCoverage() {
 
     return CoverageSolution();
 }
+
+// MARK: MPI
 
 void DistributedMinimalCoverage::scheduleWork() {
     deque<DataParameters> parametersQueue;
