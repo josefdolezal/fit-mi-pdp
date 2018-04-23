@@ -27,6 +27,9 @@ int main(int argc, char * argv[]) {
         Time start;
         CoverageSolution solution = solver.minimalCoverage();
 
+        // Skip outputs for worker threads
+        if(!solution.isActualSolution) continue;
+
         cout << "::::: File: " << fileName << " :::::"  << endl;
         cout << "Minimal steps needed: " << solution.size() - 1 << endl;
         cout << solution << endl;

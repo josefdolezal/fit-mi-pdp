@@ -42,13 +42,13 @@ CoverageSolution DistributedMinimalCoverage::minimalCoverage() {
 
     if(isScheduler(rank)) {
         scheduleWork();
+        bestSolution.isActualSolution = true;
     } else {
         receiveWork();
     }
 
     MPI_Finalize();
 
-    bestSolution.isActualSolution = true;
     return bestSolution;
 }
 
@@ -112,6 +112,7 @@ void DistributedMinimalCoverage::scheduleWork() {
             parametersQueue.pop_front();
 
             serialize(params);
+
             MPI_Send(serializationBuffer, bufferSize, MPI_INT, destination, TAG_WORK, MPI_COMM_WORLD);
         }
     }
@@ -126,7 +127,7 @@ void DistributedMinimalCoverage::scheduleWork() {
             DataParameters solution = deserialize();
 
             if(solution.currentSolution.size() < bestSolution.size()) {
-                bestSolution = solution;
+                bestSolution = solution.currentSolution;
             }
         }
 
@@ -168,10 +169,12 @@ void DistributedMinimalCoverage::receiveWork() {
             break;
         } else {
             DataOrientedCoverage solver(chessboard);
-            CoverageSolution solution = solver.minimalCoverage();
+            DataParameters initialParameters = deserialize();
+
+            CoverageSolution solution = solver.minimailCoverageWithInitial(initialParameters);
 
             // Solution was found
-            if(solution.size() == chessboard.numberOfBlackPieces) {
+            if(solution.blacksTaken() == chessboard.numberOfBlackPieces) {
                 DataParameters parameters(chessboard.queenLocation, solution, (int)solution.size(), chessboard.numberOfBlackPieces);
 
                 serialize(parameters);
