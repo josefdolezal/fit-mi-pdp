@@ -13,3 +13,9 @@ DataParameters::DataParameters(Location location, CoverageSolution currentSoluti
 {
     
 }
+
+ostream& operator <<(ostream & os, const DataParameters& lhs) {
+    os << lhs.currentSolution << "at " << lhs.location;
+
+    return os;
+}

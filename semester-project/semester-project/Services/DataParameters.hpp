@@ -20,6 +20,8 @@ public:
     uint32_t blacksTaken;
 
     DataParameters(Location, CoverageSolution, uint32_t, uint32_t);
+
+    friend ostream& operator <<(ostream & os, const DataParameters& lhs);
 };
 
 #endif /* DataParameters_hpp */
