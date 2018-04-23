@@ -25,7 +25,7 @@ DistributedMinimalCoverage::DistributedMinimalCoverage(ChessBoard& chessboard, i
 
     // length + x + y + depth + taken + (x, y, taken) * upperBound
 
-    bufferSize = 5 + (3 * chessboard.upperBound);
+    bufferSize = 5 + (4 * chessboard.upperBound);
     serializationBuffer = new int[bufferSize];
 }
 
@@ -232,8 +232,8 @@ void DistributedMinimalCoverage::scheduleMovement(int32_t x, int32_t y, uint32_t
 // Send object into buffer
 int DistributedMinimalCoverage::serialize(DataParameters &parameters) {
     int* b = serializationBuffer;
-    int solutionSize = (int)parameters.currentSolution.size();
-    int size = 5 + solutionSize;
+    int solutionSize = (int)parameters.currentSolution.steps.size();
+    int size = 5 + solutionSize * 3;
 
     b[0] = size;
     b[1] = parameters.location.x;
