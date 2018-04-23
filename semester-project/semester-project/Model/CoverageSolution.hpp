@@ -24,6 +24,8 @@ public:
     vector<pair<Location, bool>> steps;
 
     size_t size() const;
+    int blacksTaken() const;
+
     void add(const Location &, bool taken);
     bool isTaken(const Location &) const;
 

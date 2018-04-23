@@ -28,6 +28,10 @@ bool CoverageSolution::isTaken(const Location &location) const {
     return it != takens.end();
 }
 
+int CoverageSolution::blacksTaken() const {
+    return (int)takens.size();
+}
+
 ostream& operator << (ostream &os, const CoverageSolution &solution) {
     for(auto &step: solution.steps) {
         char taken = step.second ? '*' : '\0';
