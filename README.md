@@ -23,10 +23,16 @@ $ brew install open-mpi
 grun <mb> <count> <queue> job.sh
 ```
 
-| Parametr | Hodnota                              |
-|----------|--------------------------------------|
-| `mb`     | Typ základní desky - využít 20c      |
-| `count`  | Počet využitých desek (1, 2, 3)      |
-| `queue`  | Priorita fronty (vysoká - méně času) |
+| Parametr | Hodnota                                          |
+|----------|--------------------------------------------------|
+| `mb`     | Typ základní desky - využít 20c                  |
+| `count`  | Počet využitých desek (1, 2, 3)                  |
+| `queue`  | Priorita fronty (vysoká - méně času), `pdp_fast` |
 
 > Program by měl mít konfigurovatelný počet vláken parametrem z CLI
+
+3 problémy, zhruba 5 až 15 minut při sekvenčním řešení.
+Různý počet procesů MPI - 1 až 3.
+Různý počet vláken OMP - 1 až 20.
+
+Zdroje: 6xMB (každá 2 CPU, každé CPU má 10 jader). Spuštění je omezeno na 60 jader.
