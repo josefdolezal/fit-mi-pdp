@@ -59,6 +59,36 @@ Měření (doplnit).
 
 \section{Popis paralelního algoritmu a jeho implementace v OpenMP}
 
+Paralelní algoritmus má velmi podobnou implementaci jako sekvenční řešení.
+Tento problém je možné paralelizovat dvěma způsoby -- úkolově a datově.
+Popisem obou způsobů se zabývám níže.
+
+\subsection{Úkolově orientovaný paralelismus}
+
+Úkolově orientovaný paralelismus je implementovaný pomocí direktiv \texttt{omp parallel} a \texttt{omp task}.
+První z direktiv informuje \textit{OpenMP} o začátku paraleního výpočtu.
+Druhá určuje, jaký konkrétně výpočet se bude paralelizovat.
+Díky implicitní bariéře paralelizovaného bloku (první direktiva) máme jistotu, že výstup algoritmus vrátí až ve chvíli, kdy všechny paralelní výpočty doběhly.
+
+Jednotlivými úkoly jsou pak kroky královnou o jedno pole do strany.
+Oproti sekvenčnímu řešení přibyly tedy pouze direktivy.
+
+\subsection{Datově orientovaný paralelismus}
+
+Datově orientovaný paralelismus už se od sekvenčního řešení liší více.
+Je implementováno frontou úkolů, které je potřeba vypočítat.
+Jednotlivými úkoly jsou počáteční stavy, které do fronty zařadilo před paralelním výpočtem hlavní vláknou.
+
+Toto vlákno napočítá sekvenčním průchodem dostatečný počet výchozích stavů, aby zátěž rovnoměrně pokryla počet dostupných vláken.
+Po naplnění fronty se přechází k paralelnímu zpracování.
+
+Prostředí \textit{OpenMP} nabízí k tomuto výpočtu direktivu \texttt{omp parallel for}.
+Ta umožňuje paralelizovat průchod \texttt{for} smyček.
+Jednotlivá vlákna následně sekvenčně projdou všechny dostupné stavy z výchozí konfigurace.
+Průběžně nejlepší řešení se ukládá do sdílené paměti, ke které vlákna přistupují sekvenčně.
+
+Direktiva obsahuje implicitní bariéru, obdobně jako u úkolového paralelismu tedy program vrátí řešení až ve chvíli, kdy skončí poslední vlákno.
+
 \section{Popis paralelního algoritmu a jeho implementace v MPI}
 
 \section{Naměřené výsledky a vyhodnocení}
