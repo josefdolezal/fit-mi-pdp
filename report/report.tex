@@ -57,11 +57,15 @@ V implementaci není využito žádných heuristik, z tohoto důvodu je pravděp
 
 Měření (doplnit).
 
-\section{Popis paralelního algoritmu a jeho implementace v OpenMP}
+\section{Popis paralelního algoritmu a jeho implementace\\v OpenMP}
 
 Paralelní algoritmus má velmi podobnou implementaci jako sekvenční řešení.
 Tento problém je možné paralelizovat dvěma způsoby -- úkolově a datově.
 Popisem obou způsobů se zabývám níže.
+
+Při výpočtu v prostředí \textit{OpenMP} je spuštěn jeden proces, který pracuje na více vláknech.
+Vlákna mají sdílenou paměť, do které zapisují průběžně nejlepší nalezené řešení.
+Pro zamezenení časově závislých chyb se využívá kritických sekcí -- zde vlákna k zápisu do sdílené paměti využívají sekvenční přístup.
 
 \subsection{Úkolově orientovaný paralelismus}
 
@@ -91,12 +95,45 @@ Direktiva obsahuje implicitní bariéru, obdobně jako u úkolového paralelismu
 
 \section{Popis paralelního algoritmu a jeho implementace v MPI}
 
+Prostředí \textit{MPI} nabízí oproti \textit{OpenMP} paralelizaci s distribuovanou pamětí, tedy pomocí více procesů.
+
+Procesy jsou rozděleny na jeden hlavní (\textit{master}) a více pracovních (\textit{slave}).
+Hlavní proces se stará o plánování práce pro ostatní vlákna a o vyhodnocování mezivýsledků.
+Pracovní procesy dále využívají \textit{OpenMP} pro práci na více vláknech, konkrétně datový paralelismus popsaný výše.
+
+Vstupním bodem algoritmu je funkce, která se spustí ve všech procesech.
+Každý proces si následně zjistí své číslo (\textit{rank}) a podle toho vykonává práci jako \textit{master} (pokud \textit{rank} je roven 0) nebo \textit{slave}.
+
+Hlavní vlákno si nejprve vytvoří frontu výchozích stavů, které bude zadávat pracovním vláknům.
+Po vytvoření dostatečně velké fronty je každém dalšímu procesu zaslán jeden počáteční stav.
+
+Dokud fronta není prázdná, hlavní proces čeká na přijetí výsledku.
+Po přijetí zpracuje výsledek a zadá nový počáteční stav vláknu, které vrátilo výsledek.
+
+Jakmile je fronta prázdná, hlavní proces přejde začne čekat na výsledky ostatních vláken.
+Po přijetí posledního výsledku odešle informaci o ukončení výpočtu a vrátí výsledek.
+Ostatní vlákna se ukončí po přijetí zprávy o ukončení výpočtu.
+
+\subsection{Práce s distribuovanou pamětí}
+
+Protože se v \textit{MPI} vytváří více procesů, není možné využít pro mezivýpočty sdílenou paměť.
+Procesy mezi sebou tedy komunikují pomocí zasílání zpráv.
+Každá zpráva má mimo jiné odesílatele, příjemce, obsah a typ (\textit{tag}).
+
+V obsahu zprávy je nutné využít jednoduchých datových typů (např. \texttt{int}, \texttt{char} atp.) nebo jejich kompozice.
+Nelze ale posílat složité datové struktury skládající se z dalších datových struktu (např. \texttt{vector}, \texttt{queue}, \dots).
+Takové objekty je potřeba \textit{převést} na kompozici primitivních typů a odeslat je v této formě.
+Tomuto postupu se říká \textit{serializace}.
+
+\subsection{Serializace}
+
+Pro zasílání komplexních datových struktur jsem využil staticky naalokované pole čísel (\textit{int*}).
+Při serializaci se veškeré informace převedou na čísla podle předem daného postupu.
+Vlákno, které objekt příjme provede opačný postup a sestaví si komplexní objekt.
+Dále může pracovat stejným způsobem, jako při implementaci s \textit{OpenMP}.
+
 \section{Naměřené výsledky a vyhodnocení}
 
 \section{Závěr}
-
-\section{Literatura}
-
-\appendix
 
 \end{document}
