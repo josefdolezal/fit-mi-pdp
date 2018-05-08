@@ -36,6 +36,27 @@ Je-li vstup nepatrně větší (např. 15 polí), program už nedoběhne v přij
 
 Tento problém je tedy vhodný na využití paralelního výpočtu, jehož zkoumáním se práce zabývá.
 
+\section{Popis sekvenčního algoritmu}
+
+Sekvenční algoritmus je implementován pomocí prohledávání do hloubky (\textit{DFS}) s využitím ořezávání hranic.
+Ořezáváním hranic při průchodu statového prostoru se myslí vynechání takových stavů, které už nemohou aktuální řešení vylepšit.
+
+Algoritmus začíná na pozici královny, odkud další řešení vyhledává pohybem vždy o právě jedno pole do všech směrů.
+Každý z těchto pohybů je novým stavem, odkud se královna opět vydává všemi směry.
+Tento postup je tedy implementován pomocí rekurze.
+
+Vstupem rekurzivní funkce je aktuální délka cesty (hloubka řešení), počet sebraných pěšců a cestu, kterou se královna na danné pole dostala.
+Rekurzivní je volání je ukončeno, v takovém kroku, kdy královna zatím nesebrala všechny pěšce ale dalším krokem by přesáhla horní odhad.
+Taková cesta pak není řešením.
+
+Další optimalizací tohoto algoritmu je udržování doposud nalezeného minima.
+V rekurzivní funkci je následně možné odhalit, že cesta nebude řešením, pokud součet aktuální délky cesty a počtu zbývajících pěšců přesahuje aktuální minimum.
+Tyto optimalizace jsem v úvodu představil jako metodu ořezávání větví.
+
+V implementaci není využito žádných heuristik, z tohoto důvodu je pravděpodobně oproti referenčnímu řešení u větších vstupních dat zhruba dvakrát pomaleší.
+
+Měření (doplnit).
+
 \section{Popis paralelního algoritmu a jeho implementace v OpenMP}
 
 \section{Popis paralelního algoritmu a jeho implementace v MPI}
