@@ -10,7 +10,7 @@
 \begin{document}
 \begin{center}\large
 \bf Semestrální projekt MI-PDP 2017/2018:\\[6mm]
-    Paralelni algoritmus pro řešení problému\\[3mm]
+    Paralelní algoritmus pro řešení problému\\[3mm]
     Bílá královna na šachovnici -- KAS\\[6mm]
     Josef Doležal\\[2mm]
     magisterské studium, FIT ČVUT, Thákurova 9, 160 00 Praha 6\\[2mm]
@@ -20,7 +20,21 @@
 \thispagestyle{empty}
 \newpage
 
-\section{Definice problému a popis sekvenčního algoritmu}
+\section{Definice problému}
+
+Problém bílé královny na šachovnici je nalezení minimálního počtu tahů, které musí královna udělat, aby vzala všechny oponentovi pěšce.
+Tento problém je zadán jako šachovnice (o velikosti $n$), kolekce souřadnic pěšců a pozice královny.
+Má-li úloha řešení, pak horní mez pro sebrání pěšců je rovna $3 \cdot q$, kde $q$ je počet pěšců.
+Tato horní mez je mnohdy výrazně vyšší než skutečné řešení, z tohoto důvodu program očekává dodatečnou informaci o horním odhadu.
+
+Složitost tohoto algoritmu při řešení hrubou silou je (doplnit).
+Pro vstupy o malých rozměrech šachovnice je možné problém tímto způsobem řešit.
+Časová složit ale roste exponencionálně s velikostí vstupu, pro velké $n$ je tak možné, že program nenalezne řešení v konečném čase.
+
+Pro vstupy o velikosti 10 šachovnicových polí už doba běhu může přesáhnout jednotky minut.
+Je-li vstup nepatrně větší (např. 15 polí), program už nedoběhne v přijatelné době.
+
+Tento problém je tedy vhodný na využití paralelního výpočtu, jehož zkoumáním se práce zabývá.
 
 \section{Popis paralelního algoritmu a jeho implementace v OpenMP}
 
