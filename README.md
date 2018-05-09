@@ -1,5 +1,21 @@
-# fit-mi-pdp
-Repozitář k předmětu MI-PDP 2017/18
+# MI-PDP: Paralelní a distribuované programování
+
+Repozitář věnovaný semestrální práci předmětu MI-PDP, vyučovaný na FIT ČVUT (@FIT_CTU).
+Seznam materiálů k ostatním předmětům je v [samostatném repozitáři](https://github.com/josefdolezal/fit-cvut).
+
+| Přednášející | Cvičící     | Běh předmětu |
+|--------------|-------------|--------------|
+| Pavel Tvrdík | Michal Šoch | ZS 2017/18   |
+
+Repozitář obsahuje zdrojové kódy k domácím úlohám a závěrečné semestrální práci.
+
+Řešeným problémem je hledání minimálního počtu tahů královnou po šachovnici nutných k sebrání všech pěšců.
+Implementace obsahuje:
+
+* Sekvenční řešení
+* Paralelní řešení OpenMP (taskový paralelismus)
+* Paralelní řešení OpenMP (datový paralelismus)
+* Sekvenční řešení MPI
 
 ### OpenMP v Xcode
 
@@ -9,7 +25,7 @@ Pro správné fungování je potřeba doinstalovat `clang` s knihovnou OpenMP. P
 $ brew install llvm
 ```
 
-### OpenMPI v Xcode
+### MPI v Xcode
 
 Pro nalinkování OpenMPI je potřeba pomocí `brew` knihovnu doinstalovat. V nastavení projektu je potřeba přidat hlavičky a spouštět binárku pomocí `mpirun`, návod [zde](https://stackoverflow.com/a/31525928/9016753).
 
@@ -17,7 +33,7 @@ Pro nalinkování OpenMPI je potřeba pomocí `brew` knihovnu doinstalovat. V na
 $ brew install open-mpi
 ```
 
-### Spouštění na Star
+### Spouštění na Star klastru
 
 ```
 grun <mb> <count> <queue> job.sh
