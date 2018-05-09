@@ -212,4 +212,28 @@ Z tohoto důvodu jsem měření \textit{MPI} vynechal.
 
 \section{Závěr}
 
+Měření ukazuje, že paralelní výpočet je pro daný vstup efektivnějíší, než jeho sekvenční varianta.
+Tento výsledek je v souladu s předpoklady této úlohy.
+
+U taskového paralelismu je překvapující, že počet vláken nemá pro snížení času tak zásadní vliv jako bych předpokládal.
+Dalším zajímavým pozorováním je, že od určitého počtu vláken čas začíná prudce růst.
+Usuzuji, že tento trend je dán velikostí a vlastnostmi vstupu a pro větší instance by se graf mohl vypadat jinak.
+
+Více překvapující je ale vliv velikosti fronty na časovou náročnost datového paralelismu.
+Ten se jeví pro malé hodnoty jako značně neefektivní (pomalejíší než sekvenční řešení) ale pro velké je efektivnějíší než taskový paralelismus.
+I toto je ovšem dáno vlastnostmi vstupu a například pro malé vstupy by s velkou počáteční frontou degradoval na sekvenční řešení.
+Zajímavý je také trend poklesu času, který je vidět jak u malých tak velkých front.
+
+Implementace se po naměření jeví oproti referenčním vstupům jako velmi neefektivní.
+To je dáno jednoduchou implementací, která při procházení stavového prostoru pravděpodobně navštěvuje stavy, do který jít nemusí.
+
+Při lokálním měření \textit{MPI} jsem zjistil neefektivitu i této implementace.
+Zde by bylo možné využít přísnějíší \textit{tabu} pravidla při procházení stavového prostoru.
+Při ukládání nového řešení by navíc \textit{master} vlákno mohlo notifikovat pracovní vlákna o novém výsledku -- ty by tím pádem mohli opět lépe ořezat stavový prostor.
+
+Při přípravě jsem bohužel podcenil časovou náročnost měření na sdíleném klastru a nepodařilo se mi výsledky naměřit tam.
+To mohlo mít vliv na výsledky měření a závěr se tak může lišit o skutečné povahy chování algoritmu.
+
+Měření v prostředí \textit{MPI} není na osobním počítači významné a proto je ve zprávě vynecháno.
+
 \end{document}
