@@ -26,7 +26,6 @@ CoverageSolution PiecesMinimalCoverage::minimalCoverage() {
 
 void PiecesMinimalCoverage::findPath(const Location &location, CoverageSolution currentSolution,
                                      uint32_t currentDepth, uint32_t blacksTaken) {
-
     // Check the terminating condition
     if(bestSolution.size() - 1 == chessboard.numberOfBlackPieces ||
        currentDepth > chessboard.upperBound ||

@@ -13,6 +13,7 @@
 #include "PiecesMinimalCoverage.hpp"
 #include "DataOrientedCoverage.hpp"
 #include "Time.hpp"
+#include <chrono>
 
 using namespace std;
 
@@ -38,12 +39,15 @@ int main(int argc, const char * argv[]) {
         ChessBoard chessboard = Reader::readInput(fileName);
         DataOrientedCoverage solver(chessboard);
         Time start;
+        auto startt = chrono::high_resolution_clock::now();
         CoverageSolution solution = solver.minimalCoverage();
+        auto ep = chrono::high_resolution_clock::now();
+        std::chrono::duration<double> el = ep - startt;
 
         cout << "::::: File: " << fileName << " :::::"  << endl;
         cout << "Minimal steps needed: " << solution.size() - 1 << endl;
         cout << solution << endl;
-        cout << "::::: Time: " << Time().delta(start) << " :::::" << endl << endl;
+        cout << "::::: Time: " << el.count() << " :::::" << endl << endl;
     }
 
     return 0;

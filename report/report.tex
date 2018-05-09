@@ -6,6 +6,7 @@
 \usepackage[a4paper,textheight=674pt]{geometry}
 \usepackage{hyperref}
 \usepackage{graphicx}
+\usepackage{float}
 
 \begin{document}
 \begin{center}\large
@@ -27,7 +28,7 @@ Tento problém je zadán jako šachovnice (o velikosti $n$), kolekce souřadnic 
 Má-li úloha řešení, pak horní mez pro sebrání pěšců je rovna $3 \cdot q$, kde $q$ je počet pěšců.
 Tato horní mez je mnohdy výrazně vyšší než skutečné řešení, z tohoto důvodu program očekává dodatečnou informaci o horním odhadu.
 
-Složitost tohoto algoritmu při řešení hrubou silou je (doplnit).
+Složitost tohoto algoritmu při řešení hrubou silou je exponencionální.
 Pro vstupy o malých rozměrech šachovnice je možné problém tímto způsobem řešit.
 Časová složit ale roste exponencionálně s velikostí vstupu, pro velké $n$ je tak možné, že program nenalezne řešení v konečném čase.
 
@@ -54,8 +55,6 @@ V rekurzivní funkci je následně možné odhalit, že cesta nebude řešením,
 Tyto optimalizace jsem v úvodu představil jako metodu ořezávání větví.
 
 V implementaci není využito žádných heuristik, z tohoto důvodu je pravděpodobně oproti referenčnímu řešení u větších vstupních dat zhruba dvakrát pomaleší.
-
-Měření (doplnit).
 
 \section{Popis paralelního algoritmu a jeho implementace\\v OpenMP}
 
@@ -133,6 +132,83 @@ Vlákno, které objekt příjme provede opačný postup a sestaví si komplexní
 Dále může pracovat stejným způsobem, jako při implementaci s \textit{OpenMP}.
 
 \section{Naměřené výsledky a vyhodnocení}
+
+Pro porovnávání jednotlivých přístupů k řešení je důležité volit takové vstupy, aby paralelní řešení nemělo na synchronizaci vláken (procesů) větší režii než je samotná doba výpočtu.
+Dle mého měření to byly takové vstupy, u kterých sekvenční algoritmus vrátil výsledek v nízkých jednotkách vteřin.
+Vzhledem k exponencionální časové složitosti sekvenčního řešení je ale důležité zároveň vybrat takový vstup, pro který sekvenční řešení vrátí výsledek v přijatelném čase.
+
+Z tohoto důvodu jsem vybral vstup, pro který sekvenční řešení vrátí výsledek za $29,15$ vteřin (průměr pro 5 měření).
+
+Měření si klade za cíl zjistit efektivitu paralelního výpočtu při škálování na počítačovém klastru.
+Bohužel se mi nepodařilo včas vytvořit testovací data.
+Z tohoto důvodu jsem měření provedl na osobním zařízení.
+
+\subsection{Taskově orientovaný paralelismus}
+
+Pro taskově orientovaný paralelismus jsem vybral měření pro $2-8$ vláken.
+Od měření lze očekávat, že s rostoucím počtem vláken se čas bude zmenšovat v poměru $\frac{t}{n}$, kde $t$ je čas sekvenčního řešení a $n$ počet vláken.
+
+Na grafu \ref{fig:task} je vidět, že optimální konfigurace se pohybuje okolo 4 až 6 souběžných vláken, přičemž pro 4 vlákna dosáhl algoritmus nejlepšího výsledku.
+Je vidět, že paralelizace je pro algoritmus přínosem jen pro určité vstupy.
+To je pravděpodobně zapříčeněno tím, že režie na synchronazaci vláken je postupně vyšší a vlákna se začnou navzájem brzdit.
+
+I přes zvyšující se trend časové složitosti (od 4 vláken) je přínos značný.
+V nejlepší konfiguraci vrátil algoritmus výsledek zhruba třikát rychleji než při sekvenčním řešení.
+
+Při ohledu na nízkou náročnost implementace tohoto typu paralelizace lze usoudit, že výsledek je velmi dobrý.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{assets/parallel-task-oriented.png}
+    \caption{Taskový paralelismus -- závislost na počtu vláken}
+    \label{fig:task}
+\end{figure}
+
+\subsection{Datově orientovaný paralelismus}
+
+Pro taskově orientovaný paralelismus jsem zvolil stejný vstupní soubor a měření provedl na stejném vzorku vláken.
+Protože výpočet opět probíhá paralelně, měření by mělo mít podobný výsledek jako u taskového paralelismu.
+Výsledné časy mohou být zatížené tím, že jednotlivá vlákna vždy pracují s velkými instancemi, což by časovou náročnost mohlo negativně ovlivnit.
+
+Graf \ref{fig:data} znázorňuje časovou náročnost tohoto řešení.
+Proti všem očekáváním je výsledek podstatně horší, než u datového paralelismu.
+Časy ovšem přesahují i složitost sekvenčního řešení.
+
+Pro ověření správnosti měření jsem proto sledoval zatížení jednotlivých vláken v průběhu výpočtu.
+Pro malý počet vláken program dlouho pracuje sekvenčně, to je zapříčeněno sestavováním fronty na začátku výpočtu.
+Po sestavení fronty se vláknům předávájí počáteční stavy, které jsou ale příliš velké a nevytěžují vlákna rovnoměrně.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{assets/parallel-data-oriented.png}
+    \caption{Datově paralelismus -- závislost na počtu vláken (velikost vstupní fronty 8)}
+    \label{fig:data}
+\end{figure}
+
+Abych svou domněnku o závislosti výpočtu na počtu vláken potvrdil rozhodl jsem se měření opakovat s různými velikostmi počáteční fronty.
+Při měření jsme vyzkoušel fronty o velikost 20, 30 40 a 50.
+Přestože u velikosti 50 čas mírně poklesl, nebyl rozdíl větší než $10\%$.
+
+Poslední měření jsem provedl na frontě o velikosti 70 aby zjistil, jestli nenastane klesající trend.
+Pro tuto velikost už měření dosáhlo velmi dobrých výsledků.
+Zlepšení u běhu na 8 vláknech dosáhlo vynikajících $90\%$ (tedy čas klesl na $10\%$ původního měření).
+Výsledek měření je vidět na obrázku \ref{fig:data-2}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{assets/parallel-data-oriented-2.png}
+    \caption{Datově paralelismus -- závislost na počtu vláken (velikost vstupní fronty 70)}
+    \label{fig:data-2}
+\end{figure}
+
+Při efektivitě pro 8 souběžných vláken odpovídá doba výpočtu přibližně poměru $\frac{t}{n}$, který jsem od měření očekával.
+Algoritmus s tímto nastavením je efektivnějíší než taskový paralelismus.
+
+\subseciton{Paralelismus s MPI}
+
+Jak jsem zmínil v úvodu kapitoly o měření, testovací data pro paralelní výpočet v klastru se mi nepodařilo získat.
+Měřit efektivitu na osobním zařízení nemá vypovídací hodnotu, protože na jednom počítači degraduje na datový paralelismus, který je ale navíc zatížen meziprocesovou komunikací.
+Z tohoto důvodu jsem měření \textit{MPI} vynechal.
 
 \section{Závěr}
 

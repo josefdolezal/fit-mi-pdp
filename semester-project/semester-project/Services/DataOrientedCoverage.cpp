@@ -24,7 +24,7 @@ CoverageSolution DataOrientedCoverage::minimalCoverage() {
 
 CoverageSolution DataOrientedCoverage::minimailCoverageWithInitial(DataParameters initialParameters) {
     deque<DataParameters> parametersQueue;
-    uint32_t maxQueueSize = 8;
+    uint32_t maxQueueSize = 70;
 
     parametersQueue.push_back(initialParameters);
 
